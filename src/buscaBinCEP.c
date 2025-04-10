@@ -3,6 +3,7 @@
 #include <string.h>
 
 
+
 int c = 0;
 
 int busca_bin(Endereco * e, FILE * f, char * cep, int inicio, int fim) 

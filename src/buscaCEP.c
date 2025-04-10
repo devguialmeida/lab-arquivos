@@ -2,7 +2,7 @@
 #include <string.h>
 #include "../include/endereco.h"
 
-//typedef struct _Endereco Endereco;
+// typedef struct _Endereco Endereco;
 
 // struct _Endereco {
 //     char logradouro[72];
