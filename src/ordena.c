@@ -9,6 +9,45 @@ int compara ( const void * e1, const void * e2 ) {
     return strncmp(((Endereco*)e1)->cep,((Endereco*)e2)->cep,8);
 }
 
+
+FILE * intercala(FILE * f1, FILE * f2) {
+    FILE * saida;
+    Endereco ea, eb;
+
+    fread(&ea, sizeof(Endereco) ,1 ,f1);
+    fread(&eb, sizeof(Endereco) ,1 ,f2);
+
+    while (!feof(f1) && !feof(f2)) {
+        if (compara(&ea, &eb) < 0) {
+            fwrite(&ea, sizeof(Endereco), 1, saida);
+            fread(&ea, sizeof(Endereco), 1, f1);
+        }
+        else {
+            fwrite(&eb, sizeof(Endereco), 1, saida);
+            fread(&eb, sizeof(Endereco), 1, f2);
+        }
+    }
+
+    while(!feof(f1)) {
+        fwrite(&ea, sizeof(Endereco), 1, saida);
+        fread(&ea, sizeof(Endereco), 1, f1);
+    }
+
+    while(!feof(f2)) {
+        fwrite(&ea, sizeof(Endereco), 1, saida);
+        fread(&ea, sizeof(Endereco), 1, f2);
+    }
+
+    fclose(f1);
+    fclose(f2);
+    fclose(saida);
+
+
+    return saida;
+}
+
+
+
 int main (int argc, char ** argv)
 {
     FILE * fPtr;
@@ -37,13 +76,23 @@ int main (int argc, char ** argv)
 
     for (int i = 0; i < qtdParcelas; i++) {
         FILE * iParcelaPtr;
-        sprintf(nomeArq, "a%d.dat", i);
+        sprintf(nomeArq, "data/a%d.dat", i);
         iParcelaPtr = fopen(nomeArq,"wb");
         qsort(e, parcela, sizeof(Endereco), compara);
-        // to be continued
-
     }
-    
+
+    int passo = qtdParcelas/2;
+/* 
+CONTINUAR
+    while (passo > 1) {
+        FILE * p1 = fopen("a");
+        FILE * p2 = fopen();
+
+        intercala();
+        passo/2;
+    }
+*/
+
     
 
 
