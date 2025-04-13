@@ -10,10 +10,9 @@ int compara ( const void * e1, const void * e2 ) {
 }
 
 
-FILE * intercala(FILE * f1, FILE * f2) {
-    FILE * saida;
+void intercala(FILE * f1, FILE * f2, FILE * saida) {
+    // FILE * saida = fopen(nomeSaida, "wb");
     Endereco ea, eb;
-
     fread(&ea, sizeof(Endereco) ,1 ,f1);
     fread(&eb, sizeof(Endereco) ,1 ,f2);
 
@@ -34,16 +33,14 @@ FILE * intercala(FILE * f1, FILE * f2) {
     }
 
     while(!feof(f2)) {
-        fwrite(&ea, sizeof(Endereco), 1, saida);
-        fread(&ea, sizeof(Endereco), 1, f2);
+        fwrite(&eb, sizeof(Endereco), 1, saida);
+        fread(&eb, sizeof(Endereco), 1, f2);
     }
 
-    fclose(f1);
-    fclose(f2);
+    
     fclose(saida);
 
 
-    return saida;
 }
 
 
@@ -52,15 +49,12 @@ int main (int argc, char ** argv)
 {
     FILE * fPtr;
     Endereco * e;
-    int qtdParcelas;
+    int qtdParcelas = 8;
     long qtdEnderecos, posicao, parcela;
 
-    if (argc != 3) {
-        fprintf(stderr, "USO: %s [caminho/para/entrada] [caminho/para/saida]\n", argv[0]);
-        return 1;
-    }
+    
 
-    fPtr = fopen(argv[1], "rb");
+    fPtr = fopen("data/cep_ordenado.dat", "rb");
     fseek(fPtr,0,SEEK_END);
     posicao = ftell(fPtr);
     qtdEnderecos = posicao / sizeof(Endereco);
@@ -69,29 +63,45 @@ int main (int argc, char ** argv)
     rewind(fPtr);
     
     if (fread(e,sizeof(Endereco),parcela, fPtr) == parcela) {
-        printf("Lido = OK!");
+        printf("Lido = OK!\n");
     }
-
+    
+    rewind(fPtr);
     char nomeArq[100];
 
     for (int i = 0; i < qtdParcelas; i++) {
         FILE * iParcelaPtr;
         sprintf(nomeArq, "data/a%d.dat", i);
         iParcelaPtr = fopen(nomeArq,"wb");
+        fread(e, sizeof(Endereco), parcela, fPtr);
         qsort(e, parcela, sizeof(Endereco), compara);
+        fwrite(e, sizeof(Endereco), parcela, iParcelaPtr);
+        fclose(iParcelaPtr);
     }
+    rewind(fPtr);
 
-    int passo = qtdParcelas/2;
-/* 
-CONTINUAR
-    while (passo > 1) {
-        FILE * p1 = fopen("a");
-        FILE * p2 = fopen();
 
-        intercala();
-        passo/2;
+    int indexSaida = qtdParcelas;
+    
+    for (int i = 0; i < (qtdParcelas-1) * 2; i+=2) {
+        char iNomeParcela[100];
+        char proxNomeParcela[100];
+        char nomeSaida[100];
+        
+        sprintf(iNomeParcela, "data/a%d.dat", i);
+        sprintf(proxNomeParcela, "data/a%d.dat", i+1);
+        sprintf(nomeSaida, "data/a%d.dat", indexSaida);
+        
+        FILE * saida = fopen(nomeSaida, "wb");
+        FILE * iParcelaPtr = fopen(iNomeParcela, "rb");
+        FILE * proxParcelaPtr = fopen(proxNomeParcela, "rb");
+        
+        printf("Merge a%d with a%d. Output ----> a%d\n", i, i+1, indexSaida);
+        remove(iNomeParcela);
+        remove(proxNomeParcela);
+        intercala(iParcelaPtr, proxParcelaPtr, saida);
+        indexSaida++;
     }
-*/
 
     
 
