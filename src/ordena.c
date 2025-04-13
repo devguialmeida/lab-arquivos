@@ -45,7 +45,7 @@ void intercala(FILE * f1, FILE * f2, FILE * saida) {
 
 
 
-int main (int argc, char ** argv)
+int main (void)
 {
     FILE * fPtr;
     Endereco * e;
@@ -68,16 +68,29 @@ int main (int argc, char ** argv)
     
     rewind(fPtr);
     char nomeArq[100];
+    
+    long restante = qtdEnderecos;
 
-    for (int i = 0; i < qtdParcelas; i++) {
+    for (int i = 0; i < qtdParcelas && restante > 0; i++) {
         FILE * iParcelaPtr;
         sprintf(nomeArq, "data/a%d.dat", i);
         iParcelaPtr = fopen(nomeArq,"wb");
-        fread(e, sizeof(Endereco), parcela, fPtr);
-        qsort(e, parcela, sizeof(Endereco), compara);
-        fwrite(e, sizeof(Endereco), parcela, iParcelaPtr);
+
+        long qtdLer = parcela;
+        if (i == qtdParcelas - 1) {
+            qtdLer = restante; // lê o que sobrou
+        }
+
+        long qtdLida = fread(e, sizeof(Endereco), qtdLer, fPtr);
+        if (qtdLida == 0) break;
+
+        qsort(e, qtdLida, sizeof(Endereco), compara);
+        fwrite(e, sizeof(Endereco), qtdLida, iParcelaPtr);
         fclose(iParcelaPtr);
+
+        restante -= qtdLida;
     }
+
     rewind(fPtr);
 
 
@@ -102,6 +115,8 @@ int main (int argc, char ** argv)
         intercala(iParcelaPtr, proxParcelaPtr, saida);
         indexSaida++;
     }
+
+    rename("data/a14.dat", "data/novo.dat");
 
     
 
