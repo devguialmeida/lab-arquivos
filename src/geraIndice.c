@@ -36,7 +36,7 @@ int main () {
         indiceAtual++;
     }
     for(int i = 0; i < qtd; i++) {
-        printf("QTD IS %d",qtd);
+        printf("QTD IS %ld",qtd);
         printf("Posicao: %ld\t CEP: %s\n",vecIndice[i].posicao, vecIndice[i].cep);
         getchar();
     }
