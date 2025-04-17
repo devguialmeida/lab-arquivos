@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "indicecep.h": "c",
+        "endereco.h": "c"
+    }
+}
