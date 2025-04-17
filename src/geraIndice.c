@@ -30,17 +30,17 @@ int main () {
     int indiceAtual = 0;
     while (qt > 0)
     {
-        strcpy(vecIndice[indiceAtual].cep, e.cep);
+        strncpy(vecIndice[indiceAtual].cep, e.cep, 8);
         vecIndice[indiceAtual].posicao = indiceAtual;
         qt = fread(&e, sizeof(Endereco),1,f);
         indiceAtual++;
     }
     // for(int i = 0; i < qtd; i++) {
     //     printf("QTD IS %ld\n",qtd);
-    //     printf("Posicao: %ld\t CEP: %s\n",vecIndice[i].posicao, vecIndice[i].cep);
+    //     printf("Posicao: %ld\t CEP: %.8s\n",vecIndice[i].posicao, vecIndice[i].cep);
     //     getchar();
     // }
-    qsort(vecIndice,qtd,sizeof(IndiceCEP),compara);
+    qsort(vecIndice,qtd,sizeof(IndiceCEP),comparaIndice);
     saida = fopen("data/CEP_indices.dat", "wb");
     fwrite(vecIndice, sizeof(IndiceCEP), qtd, saida);
 }
