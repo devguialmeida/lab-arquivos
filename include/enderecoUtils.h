@@ -1,5 +1,4 @@
 #include <string.h>
-#include "endereco.h"
 
 int compara(const void *e1, const void *e2)
 {

@@ -4,7 +4,7 @@
 
 #include "../include/indiceCEP.h"
 #include "../include/endereco.h"
-
+#include "../include/enderecoUtils.h"
 
 
 int main () {
@@ -35,11 +35,12 @@ int main () {
         qt = fread(&e, sizeof(Endereco),1,f);
         indiceAtual++;
     }
-    for(int i = 0; i < qtd; i++) {
-        printf("QTD IS %ld",qtd);
-        printf("Posicao: %ld\t CEP: %s\n",vecIndice[i].posicao, vecIndice[i].cep);
-        getchar();
-    }
-
-    
+    // for(int i = 0; i < qtd; i++) {
+    //     printf("QTD IS %ld\n",qtd);
+    //     printf("Posicao: %ld\t CEP: %s\n",vecIndice[i].posicao, vecIndice[i].cep);
+    //     getchar();
+    // }
+    qsort(vecIndice,qtd,sizeof(IndiceCEP),compara);
+    saida = fopen("data/CEP_indices.dat", "wb");
+    fwrite(vecIndice, sizeof(IndiceCEP), qtd, saida);
 }
