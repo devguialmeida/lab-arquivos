@@ -1,5 +1,7 @@
-typedef struct _Endereco Endereco;
+#ifndef __ENDERECO__
+#define __ENDERECO__
 
+typedef struct _Endereco Endereco;
 
 struct _Endereco {
     char logradouro[72];
@@ -10,3 +12,5 @@ struct _Endereco {
     char cep[8];
     char lixo[2]; // espaço + quebra de linha ao final de cada registro
 };
+
+#endif

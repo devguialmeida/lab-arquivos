@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/indiceCEP.h"
+#include <indiceCEP.h>
 #include "../include/endereco.h"
 #include "../include/enderecoUtils.h"
 
