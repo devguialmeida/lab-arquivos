@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <indiceCEP.h>
+#include "../include/indiceCEP.h"
 #include "../include/endereco.h"
 #include "../include/enderecoUtils.h"
 
@@ -13,7 +13,6 @@ int main () {
 	IndiceCEP * vecIndice;
     Endereco e;
 	long posicao, qtd;
-    // fprintf(stdin,"b..");
 
     f = fopen("data/cep_ordenado.dat","rb");
 
@@ -37,8 +36,8 @@ int main () {
     }
     // for(int i = 0; i < qtd; i++) {
     //     printf("QTD IS %ld\n",qtd);
-    //     printf("Posicao: %ld\t CEP: %.8s\n",vecIndice[i].posicao, vecIndice[i].cep);
-    //     getchar();
+    //     printf("Posicao: %x\t CEP: %.8s\n",vecIndice[i].posicao, vecIndice[i].cep);
+    //     // getchar();
     // }
     qsort(vecIndice,qtd,sizeof(IndiceCEP),comparaIndice);
     saida = fopen("data/CEP_indices.dat", "wb");
