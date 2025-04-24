@@ -25,6 +25,7 @@ int main() {
         default: ""; break;
       }
       printf("%s %s \n\n ", category, t);
+      // printf("Token %s", t);
       t = strtok_r(NULL, ";\n", &x);
       time++;
     }
