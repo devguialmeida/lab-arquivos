@@ -9,10 +9,10 @@ int main() {
 
     char * x;
     char * t = strtok_r(buf, ";\n", &x);
-    char time = 0;
+    int time = 0;
     while(t) {
-      char t2 = time % 3;
-      char category[32];
+      int t2 = (time % 3);
+      char category[9];
       switch(t2) {
         case 0:
           strcpy(category, "Nome");
@@ -22,7 +22,8 @@ int main() {
           break;
         case 2:
           strcpy(category, "Telefone");
-        default: ""; break;
+        default: 
+	  break;
       }
       printf("%s %s \n\n ", category, t);
       // printf("Token %s", t);

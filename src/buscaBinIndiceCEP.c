@@ -69,7 +69,7 @@ int main (int argc, char ** argv)
     return 1;
   } 
   else {
-    // printf("SERASE???");
+
     fseek(f2Ptr, posFinal * sizeof(Endereco), SEEK_SET);
     fread(&e,sizeof(Endereco),1,f2Ptr);
     printf("%.72s\n%.72s\n%.72s\n%.72s\n%.2s\n%.8s\n", e.logradouro, e.bairro, e.cidade, e.uf, e.sigla, e.cep);
