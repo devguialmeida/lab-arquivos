@@ -29,7 +29,7 @@ int main (int argc, char ** argv) {
     c = 0;
 
     printf("Tamanho da Estrutura: %ld\n\n", sizeof(Endereco));
-    if((fPtr = fopen("data/cep_ordenado.dat","rb")) == NULL) {
+    if((fPtr = fopen("data/cep.dat","rb")) == NULL) {
         printf("Erro ao abrir o arquivo. O programa será abortado.\n");
         return 1;
     }
