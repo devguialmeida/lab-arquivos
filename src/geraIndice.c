@@ -14,7 +14,7 @@ int main () {
     Endereco e;
 	long posicao, qtd;
 
-    f = fopen("data/cep_ordenado.dat","rb");
+    f = fopen("data/cep.dat","rb");
 
 	fseek(f,0,SEEK_END);
 	posicao = ftell(f);
