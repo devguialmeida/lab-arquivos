@@ -50,7 +50,7 @@ int main (int argc, char ** argv)
   
   c = 0;
 
-  if((fPtr = fopen("data/a14.dat", "rb")) == NULL) {
+  if((fPtr = fopen("data/novo.dat", "rb")) == NULL) {
     printf("Erro ao abrir o arquivo. O programa será abortado.");
     return 1;
   }
