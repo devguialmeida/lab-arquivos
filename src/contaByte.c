@@ -5,7 +5,7 @@ int main ( void )
 {
     FILE * fPtr;
     
-    fPtr = fopen("data/cep_ordenado.dat","rb");
+    fPtr = fopen("data/cep.dat","rb");
     if(fPtr == NULL) {
         printf("Erro desconhecido.\n");
         return 1;
