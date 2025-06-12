@@ -54,7 +54,7 @@ int main (void)
 
     
 
-    fPtr = fopen("data/cep_ordenado.dat", "rb");
+    fPtr = fopen("data/cep.dat", "rb");
     fseek(fPtr,0,SEEK_END);
     posicao = ftell(fPtr);
     qtdEnderecos = posicao / sizeof(Endereco);
